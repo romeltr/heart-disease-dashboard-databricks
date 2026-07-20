@@ -1,0 +1,732 @@
+{
+  "datasets": [
+    {
+      "name": "ds_kpis",
+      "displayName": "vw_indicadores",
+      "queryLines": [
+        "SELECT * FROM vw_indicadores"
+      ]
+    },
+    {
+      "name": "ds_diag",
+      "displayName": "vw_distribucion_diagnostico",
+      "queryLines": [
+        "SELECT num AS nivel_enfermedad, sex, age FROM heart_disease"
+      ]
+    },
+    {
+      "name": "ds_sexo",
+      "displayName": "vw_riesgo_por_sexo",
+      "queryLines": [
+        "SELECT * FROM vw_riesgo_por_sexo"
+      ]
+    },
+    {
+      "name": "ds_cp",
+      "displayName": "vw_dolor_pecho_severidad",
+      "queryLines": [
+        "SELECT * FROM vw_dolor_pecho_severidad"
+      ]
+    },
+    {
+      "name": "ds_chol",
+      "displayName": "vw_riesgo_colesterol",
+      "queryLines": [
+        "SELECT * FROM vw_riesgo_colesterol"
+      ]
+    },
+    {
+      "name": "ds_edad",
+      "displayName": "vw_edad_grupo",
+      "queryLines": [
+        "SELECT * FROM vw_edad_grupo"
+      ]
+    },
+    {
+      "name": "9db158d2",
+      "displayName": "heart_disease_filtros",
+      "queryLines": [
+        "SELECT sex, age FROM heart_disease"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "page_main",
+      "displayName": "Heart Disease",
+      "layout": [
+        {
+          "widget": {
+            "name": "title",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Heart Disease - Dashboard (Grupo 1IL-133)"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 24,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_total",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_kpis",
+                  "fields": [
+                    {
+                      "name": "total_pacientes",
+                      "expression": "`total_pacientes`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total Pacientes",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "total_pacientes"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_pct",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_kpis",
+                  "fields": [
+                    {
+                      "name": "pct_con_enfermedad",
+                      "expression": "`pct_con_enfermedad`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "% Con Enfermedad",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "pct_con_enfermedad"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 1,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_edad",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_kpis",
+                  "fields": [
+                    {
+                      "name": "edad_promedio",
+                      "expression": "`edad_promedio`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Edad Promedio",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "edad_promedio"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 12,
+            "y": 1,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "kpi_chol",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_kpis",
+                  "fields": [
+                    {
+                      "name": "colesterol_promedio",
+                      "expression": "`colesterol_promedio`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Colesterol Promedio",
+                "showTitle": true
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "colesterol_promedio"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 18,
+            "y": 1,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_diag",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_diag",
+                  "fields": [
+                    {
+                      "name": "nivel_enfermedad",
+                      "expression": "`nivel_enfermedad`"
+                    },
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Distribución por Nivel de Enfermedad",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "nivel_enfermedad",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(*)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 12,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_sexo",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_sexo",
+                  "fields": [
+                    {
+                      "name": "sexo",
+                      "expression": "`sexo`"
+                    },
+                    {
+                      "name": "pct_enfermedad",
+                      "expression": "`pct_enfermedad`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Riesgo por Sexo (% con enfermedad)",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sexo",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "pct_enfermedad",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 12,
+            "y": 3,
+            "width": 12,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "interp1",
+            "multilineTextboxSpec": {
+              "lines": [
+                "El 45.9% de los 303 pacientes presenta algún grado de enfermedad cardíaca. La mayoría se concentra en el nivel 0 (sin enfermedad), disminuyendo progresivamente hacia los niveles más severos (3 y 4). Por sexo, los hombres muestran un riesgo notablemente mayor (\\~54%) que las mujeres (\\~26%), casi el doble."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 7,
+            "width": 24,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_cp",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_cp",
+                  "fields": [
+                    {
+                      "name": "tipo_dolor_pecho",
+                      "expression": "`tipo_dolor_pecho`"
+                    },
+                    {
+                      "name": "severidad_promedio",
+                      "expression": "`severidad_promedio`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Tipo de Dolor de Pecho vs Severidad",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "severidad_promedio",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "tipo_dolor_pecho",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 12,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_chol",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_chol",
+                  "fields": [
+                    {
+                      "name": "categoria_colesterol",
+                      "expression": "`categoria_colesterol`"
+                    },
+                    {
+                      "name": "pct_con_enfermedad",
+                      "expression": "`pct_con_enfermedad`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Riesgo por Categoría de Colesterol",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "categoria_colesterol",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "pct_con_enfermedad",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 12,
+            "y": 8,
+            "width": 12,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "interp2",
+            "multilineTextboxSpec": {
+              "lines": [
+                "El dolor de pecho asintomático es el que se asocia con mayor severidad promedio, seguido de la angina típica — resultado clínicamente relevante, ya que sugiere que la ausencia de síntomas evidentes no implica menor riesgo. En cuanto al colesterol, los pacientes en categoría 'Alto' muestran el mayor porcentaje de enfermedad (\\~47%), aunque la diferencia con 'Límite' y 'Normal' es menor de lo esperado."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 24,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "chart_edad",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "ds_edad",
+                  "fields": [
+                    {
+                      "name": "grupo_edad",
+                      "expression": "`grupo_edad`"
+                    },
+                    {
+                      "name": "colesterol_promedio",
+                      "expression": "`colesterol_promedio`"
+                    },
+                    {
+                      "name": "pacientes",
+                      "expression": "`pacientes`"
+                    },
+                    {
+                      "name": "con_enfermedad",
+                      "expression": "`con_enfermedad`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Colesterol Promedio por Grupo de Edad",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "grupo_edad",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "colesterol_promedio",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "width": 24,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "interp3",
+            "multilineTextboxSpec": {
+              "lines": [
+                "El colesterol promedio aumenta de forma consistente con la edad, pasando de \\~205 en menores de 45 años a \\~230 en mayores de 60, lo cual coincide con lo esperado clínicamente."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 17,
+            "width": 24,
+            "height": 1
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "35e6a334",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "fbd2e446",
+            "queries": [
+              {
+                "name": "dashboards/01f182a7401417bbbf763e60ea931017/datasets/01f183731b66172c852f382fc383bf60_age",
+                "query": {
+                  "datasetName": "9db158d2",
+                  "fields": [
+                    {
+                      "name": "min(age)",
+                      "expression": "MIN(`age`)"
+                    },
+                    {
+                      "name": "max(age)",
+                      "expression": "MAX(`age`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f182a7401417bbbf763e60ea931017/datasets/01f182a740141ad48d55514ca6e24f4c_age",
+                "query": {
+                  "datasetName": "ds_diag",
+                  "fields": [
+                    {
+                      "name": "min(age)",
+                      "expression": "MIN(`age`)"
+                    },
+                    {
+                      "name": "max(age)",
+                      "expression": "MAX(`age`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "selection": {
+                "defaultSelection": {
+                  "operator": {
+                    "operator": "AND",
+                    "args": []
+                  }
+                }
+              },
+              "widgetType": "range-slider",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "age",
+                    "queryName": "dashboards/01f182a7401417bbbf763e60ea931017/datasets/01f183731b66172c852f382fc383bf60_age"
+                  },
+                  {
+                    "fieldName": "age",
+                    "queryName": "dashboards/01f182a7401417bbbf763e60ea931017/datasets/01f182a740141ad48d55514ca6e24f4c_age"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 1,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "f7545c03",
+            "queries": [
+              {
+                "name": "dashboards/01f182a7401417bbbf763e60ea931017/datasets/01f183731b66172c852f382fc383bf60_sex",
+                "query": {
+                  "datasetName": "9db158d2",
+                  "fields": [
+                    {
+                      "name": "min(sex)",
+                      "expression": "MIN(`sex`)"
+                    },
+                    {
+                      "name": "max(sex)",
+                      "expression": "MAX(`sex`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f182a7401417bbbf763e60ea931017/datasets/01f182a740141ad48d55514ca6e24f4c_sex",
+                "query": {
+                  "datasetName": "ds_diag",
+                  "fields": [
+                    {
+                      "name": "min(sex)",
+                      "expression": "MIN(`sex`)"
+                    },
+                    {
+                      "name": "max(sex)",
+                      "expression": "MAX(`sex`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true
+              },
+              "widgetType": "range-slider",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "sex",
+                    "queryName": "dashboards/01f182a7401417bbbf763e60ea931017/datasets/01f183731b66172c852f382fc383bf60_sex"
+                  },
+                  {
+                    "fieldName": "sex",
+                    "queryName": "dashboards/01f182a7401417bbbf763e60ea931017/datasets/01f182a740141ad48d55514ca6e24f4c_sex"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
